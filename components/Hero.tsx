@@ -1,35 +1,130 @@
+"use client";
+
+import { motion } from "framer-motion";
+import { ArrowRight, CheckCircle2, ShieldCheck, Sparkles } from "lucide-react";
+
+const highlights = [
+  "Verified survey opportunities",
+  "Secure offerwall rewards",
+  "Trusted payout tracking",
+];
+
 export default function Hero() {
   return (
-    <section className="mx-auto flex min-h-[80vh] max-w-7xl flex-col items-center justify-center px-6 text-center">
-      <span className="mb-4 rounded-full border border-blue-200 bg-blue-50 px-4 py-1 text-sm font-medium text-blue-700">
-        Coming Soon
-      </span>
-
-      <h1 className="max-w-4xl text-5xl font-extrabold tracking-tight md:text-6xl">
-        Discover Verified Digital Rewards with Confidence
-      </h1>
-
-      <p className="mt-6 max-w-2xl text-lg leading-8 text-gray-600">
-        Taski is building a trusted platform that connects users with verified
-        digital tasks, surveys, and promotional offers from advertising and
-        market research partners.
-      </p>
-
-      <div className="mt-10 flex gap-4">
-        <a
-          href="#features"
-          className="rounded-xl bg-black px-6 py-3 font-semibold text-white transition hover:opacity-90"
+    <section
+      id="hero"
+      className="relative mx-auto grid min-h-[calc(100vh-5rem)] max-w-7xl items-center gap-12 px-4 pb-16 pt-10 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:px-8 lg:py-20"
+    >
+      <div className="relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.45 }}
+          className="mb-6 inline-flex items-center gap-2 rounded-full border border-sky-200 bg-sky-50 px-4 py-2 text-sm font-semibold text-sky-700"
         >
-          Learn More
-        </a>
+          <Sparkles className="h-4 w-4" />
+          Professional rewards platform
+        </motion.div>
 
-        <a
-          href="#security"
-          className="rounded-xl border border-gray-300 px-6 py-3 font-semibold transition hover:bg-gray-100"
+        <motion.h1
+          initial={{ opacity: 0, y: 22 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.55, delay: 0.05 }}
+          className="max-w-3xl text-4xl font-black tracking-tight text-slate-950 sm:text-5xl lg:text-6xl"
         >
-          Security
-        </a>
+          Earn from real digital opportunities with a platform built for trust.
+        </motion.h1>
+
+        <motion.p
+          initial={{ opacity: 0, y: 22 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.55, delay: 0.1 }}
+          className="mt-5 max-w-2xl text-base leading-8 text-slate-600 sm:text-lg"
+        >
+          Taski helps users discover verified surveys, market research tasks, and offerwall campaigns through a secure, transparent experience designed for modern reward seekers.
+        </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 22 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.55, delay: 0.15 }}
+          className="mt-8 flex flex-col gap-3 sm:flex-row"
+        >
+          <a
+            href="#features"
+            className="inline-flex items-center justify-center gap-2 rounded-full bg-slate-950 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-slate-900/10 transition hover:-translate-y-0.5 hover:bg-slate-800"
+          >
+            Get Started
+            <ArrowRight className="h-4 w-4" />
+          </a>
+
+          <a
+            href="#how-it-works"
+            className="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-6 py-3 text-sm font-semibold text-slate-700 transition hover:border-slate-300 hover:bg-slate-50"
+          >
+            Learn More
+          </a>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="mt-8 flex flex-col gap-3 text-sm text-slate-600 sm:flex-row sm:flex-wrap"
+        >
+          {highlights.map((item) => (
+            <div key={item} className="inline-flex items-center gap-2 rounded-full bg-white/80 px-3 py-2 shadow-sm ring-1 ring-slate-200">
+              <CheckCircle2 className="h-4 w-4 text-emerald-600" />
+              {item}
+            </div>
+          ))}
+        </motion.div>
       </div>
+
+      <motion.div
+        initial={{ opacity: 0, scale: 0.97 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.6, delay: 0.1 }}
+        className="relative"
+      >
+        <div className="absolute -left-8 top-10 h-28 w-28 rounded-full bg-sky-300/40 blur-3xl" />
+        <div className="absolute -right-6 bottom-8 h-32 w-32 rounded-full bg-indigo-300/40 blur-3xl" />
+
+        <div className="relative overflow-hidden rounded-[2rem] border border-white/70 bg-white/80 p-4 shadow-[0_20px_80px_-30px_rgba(15,23,42,0.45)] backdrop-blur-sm sm:p-6">
+          <div className="rounded-[1.5rem] bg-slate-950 p-5 text-white sm:p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-xs uppercase tracking-[0.28em] text-slate-400">Taski system</p>
+                <p className="mt-2 text-2xl font-semibold">Reward integrity</p>
+              </div>
+              <div className="rounded-2xl bg-emerald-400/15 p-3 text-emerald-300">
+                <ShieldCheck className="h-6 w-6" />
+              </div>
+            </div>
+
+            <div className="mt-6 grid gap-3 sm:grid-cols-2">
+              <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+                <p className="text-xs text-slate-400">Verification layer</p>
+                <p className="mt-2 text-lg font-semibold">Server-to-server checks</p>
+              </div>
+              <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+                <p className="text-xs text-slate-400">Fraud signals</p>
+                <p className="mt-2 text-lg font-semibold">Anti-VPN monitoring</p>
+              </div>
+            </div>
+
+            <div className="mt-3 rounded-2xl border border-sky-400/30 bg-sky-400/10 p-4">
+              <div className="flex items-center gap-2 text-sm font-medium text-sky-200">
+                <Sparkles className="h-4 w-4" />
+                Visible reward progress
+              </div>
+              <div className="mt-4 h-2 rounded-full bg-white/10">
+                <div className="h-2 w-[72%] rounded-full bg-gradient-to-r from-sky-400 to-cyan-300" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </motion.div>
     </section>
   );
 }

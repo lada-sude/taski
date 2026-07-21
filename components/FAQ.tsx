@@ -1,57 +1,50 @@
+"use client";
+
 const questions = [
   {
     question: "What is Taski?",
     answer:
-      "Taski is a platform designed to connect users with verified digital opportunities such as surveys, app testing, and promotional offers from trusted partners.",
+      "Taski is a professional rewards platform focused on verified surveys, market research, and offerwall opportunities from trusted partners.",
   },
   {
     question: "Is registration free?",
     answer:
-      "Yes. Taski is designed with no entry fees or paid activation requirements.",
+      "Yes. The platform is designed to be accessible without any entry fee or paid activation requirement.",
   },
   {
     question: "How are rewards verified?",
     answer:
-      "Completed activities are verified through partner tracking systems before rewards are processed.",
+      "Completed activities are reviewed through partner tracking systems and reward processing rules before a reward is completed.",
   },
   {
-    question: "When will rewards become available?",
+    question: "When do rewards become available?",
     answer:
-      "Reward availability depends on successful verification and settlement schedules from our partners.",
+      "Reward availability depends on successful offer completion, validation timing, and settlement schedules from participating partners.",
   },
 ];
 
 export default function FAQ() {
   return (
-    <section
-      id="faq"
-      className="bg-gray-50 py-16 md:py-24"
-    >
-      <div className="mx-auto max-w-4xl px-6">
+    <section id="faq" className="bg-slate-50/90 py-16 md:py-24">
+      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <div className="text-center">
-          <p className="font-semibold text-blue-600">
-            FAQ
-          </p>
-
-          <h2 className="mt-2 text-4xl font-bold">
-            Frequently asked questions
+          <p className="text-sm font-semibold uppercase tracking-[0.28em] text-sky-700">FAQ</p>
+          <h2 className="mt-3 text-3xl font-black tracking-tight text-slate-950 sm:text-4xl">
+            Questions users often ask up front.
           </h2>
         </div>
 
-        <div className="mt-12 space-y-5">
+        <div className="mt-12 space-y-4">
           {questions.map((item) => (
-            <div
+            <details
               key={item.question}
-              className="rounded-2xl border border-gray-200 bg-white p-6"
+              className="group rounded-[1.25rem] border border-slate-200 bg-white p-5 shadow-sm transition hover:border-sky-200"
             >
-              <h3 className="text-lg font-semibold">
+              <summary className="cursor-pointer list-none text-lg font-semibold text-slate-950 marker:hidden">
                 {item.question}
-              </h3>
-
-              <p className="mt-3 leading-7 text-gray-600">
-                {item.answer}
-              </p>
-            </div>
+              </summary>
+              <p className="mt-3 text-sm leading-7 text-slate-600">{item.answer}</p>
+            </details>
           ))}
         </div>
       </div>
