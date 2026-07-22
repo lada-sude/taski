@@ -2,17 +2,33 @@
 
 import { ArrowRight } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
+import { useRouter } from "next/navigation";
 
 export default function LoginButton() {
+  const router = useRouter();
+
   const signIn = async () => {
     const supabase = createClient();
 
+    const {
+      data: { user },
+      error,
+    } = await supabase.auth.getUser();
+
+    if (!error && user) {
+      router.replace("/dashboard");
+      return;
+    }
+
     await supabase.auth.signInWithOAuth({
-      provider: "google",
-      options: {
-        redirectTo: `${window.location.origin}/dashboard`,
-      },
-    });
+  provider: "google",
+  options: {
+    redirectTo: `${window.location.origin}/dashboard`,
+    queryParams: {
+      prompt: "select_account",
+    },
+  },
+});
   };
 
   return (

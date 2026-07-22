@@ -6,3 +6,4 @@ export function createClient() {
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
   );
 }
+//85c1bb6b-342b-4b67-bb79-d91818058411
