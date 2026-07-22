@@ -49,5 +49,5 @@ export default function DashboardClientFallback() {
     );
   }
 
-  return <TaskiDashboard user={status.user} />;
+  return <TaskiDashboard user={status.user} profile={null} />;
 }
