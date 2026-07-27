@@ -65,18 +65,19 @@ export default async function SurveysPage() {
               automatically after successful verification.
             </p>
 
-            <div className="mt-8 overflow-hidden rounded-2xl border border-slate-200 shadow-sm">
+            <div className="mt-8 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
 
-              <iframe
-                src={surveyUrl}
-                title="CPX Research Surveys"
-                width="100%"
-                height="1800"
-                className="w-full border-0"
-                loading="lazy"
-              />
+  <div className="h-[calc(100vh-180px)] min-h-[700px] w-full overflow-hidden sm:h-[1800px]">
+    <iframe
+      src={surveyUrl}
+      title="CPX Research Surveys"
+      className="h-full w-full border-0"
+      loading="lazy"
+      scrolling="yes"
+    />
+  </div>
 
-            </div>
+</div>
 
           </div>
 
