@@ -15,6 +15,8 @@ export async function GET(request: NextRequest) {
   const userId = searchParams.get("user_id");
   const amountUsd = searchParams.get("amount_usd");
   const secureHash = searchParams.get("hash");
+  
+const type = searchParams.get("type");
 
   console.log("CPX Postback Received:", {
   status,
@@ -73,7 +75,52 @@ export async function GET(request: NextRequest) {
     );
   }
 
-  return NextResponse.json({
-    success: true,
-  });
+ // Credit user profile after successful CPX completion
+if (status === "1" && type === "complete") {
+  const { data: profile, error: profileError } = await supabaseAdmin
+    .from("profiles")
+    .select(
+      "pending_balance, total_earned, surveys_completed"
+    )
+    .eq("id", userId)
+    .single();
+
+  if (profileError) {
+    console.error(profileError);
+
+    return NextResponse.json(
+      { error: "Profile lookup failed" },
+      { status: 500 }
+    );
+  }
+
+  const reward = Number(amountUsd);
+
+  const { error: updateError } = await supabaseAdmin
+    .from("profiles")
+    .update({
+      pending_balance:
+        Number(profile.pending_balance || 0) + reward,
+
+      total_earned:
+        Number(profile.total_earned || 0) + reward,
+
+      surveys_completed:
+        Number(profile.surveys_completed || 0) + 1,
+    })
+    .eq("id", userId);
+
+  if (updateError) {
+    console.error(updateError);
+
+    return NextResponse.json(
+      { error: "Profile update failed" },
+      { status: 500 }
+    );
+  }
+}
+
+return NextResponse.json({
+  success: true,
+});
 }
