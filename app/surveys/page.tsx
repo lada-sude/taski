@@ -1,8 +1,8 @@
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import crypto from "crypto";
 import { ArrowLeft, ShieldCheck } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
+import { getCPXUrl } from "@/lib/cpx";
 
 export default async function SurveysPage() {
   const supabase = await createClient();
@@ -21,18 +21,11 @@ export default async function SurveysPage() {
     .eq("id", user.id)
     .single();
 
-  const secureHash = crypto
-    .createHash("md5")
-    .update(`${user.id}-${process.env.CPX_SECURE_HASH}`)
-    .digest("hex");
-
-  const surveyUrl = `https://offers.cpx-research.com/index.php?app_id=${
-    process.env.CPX_APP_ID
-  }&ext_user_id=${encodeURIComponent(
-    user.id
-  )}&secure_hash=${secureHash}&username=${encodeURIComponent(
-    profile?.full_name ?? ""
-  )}&email=${encodeURIComponent(profile?.email ?? "")}`;
+  const surveyUrl = getCPXUrl({
+    userId: user.id,
+    username: profile?.full_name ?? "",
+    email: profile?.email ?? user.email ?? "",
+  });
 
   return (
     <main className="min-h-screen bg-slate-950">
@@ -66,18 +59,16 @@ export default async function SurveysPage() {
             </p>
 
             <div className="mt-8 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
-
-  <div className="h-[calc(100vh-180px)] min-h-[700px] w-full overflow-hidden sm:h-[1800px]">
-    <iframe
-      src={surveyUrl}
-      title="CPX Research Surveys"
-      className="h-full w-full border-0"
-      loading="lazy"
-      scrolling="yes"
-    />
-  </div>
-
-</div>
+              <div className="h-[calc(100vh-180px)] min-h-[700px] w-full overflow-hidden sm:h-[1800px]">
+                <iframe
+                  src={surveyUrl}
+                  title="CPX Research Surveys"
+                  className="h-full w-full border-0"
+                  loading="lazy"
+                  scrolling="yes"
+                />
+              </div>
+            </div>
 
           </div>
 
