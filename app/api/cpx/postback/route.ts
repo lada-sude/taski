@@ -16,6 +16,14 @@ export async function GET(request: NextRequest) {
   const amountUsd = searchParams.get("amount_usd");
   const secureHash = searchParams.get("hash");
 
+  console.log("CPX Postback Received:", {
+  status,
+  transId,
+  userId,
+  amountUsd,
+  secureHash,
+});
+
   if (!status || !transId || !userId || !amountUsd || !secureHash) {
     return NextResponse.json(
       { error: "Missing parameters" },
